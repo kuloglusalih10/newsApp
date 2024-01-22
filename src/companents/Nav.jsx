@@ -30,7 +30,7 @@ export const Nav = () => {
         <div className='p-4 hidden lg:inline lg:relative'>
           {
             navLinks.map((link, index) => (
-              <NavLink key={index} to={link.link} activeClassName="active" className="poppins-regular text-white mx-2 p-2">
+              <NavLink key={index} to={link.link}  className="poppins-regular text-white mx-2 p-2">
                 {link.title}
               </NavLink>
             ))
@@ -42,8 +42,7 @@ export const Nav = () => {
            <div className='flex flex-col w-full text-black gap-3 '>
             {
                 navLinks.map((link, index) => (
-                  <NavLink key={index} to={link.link} activeClassName="active" className="hover:text-white poppins-bold text-white mx-2 p-2">
-
+                  <NavLink key={index} to={link.link}  className="hover:text-white poppins-bold text-white mx-2 p-2">
                     {link.title}
                   </NavLink>
                 ))
