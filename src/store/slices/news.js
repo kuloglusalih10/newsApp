@@ -6,7 +6,7 @@ const initialState = {
     categories : ['sondakika', 'magazin', 'spor', 'güncel', 'yerel'],
     news: [],
     isSuccess: false,
-    isLoading : false
+    isLoading : true
 }
 
 export const fetchNews = createAsyncThunk(
@@ -45,18 +45,22 @@ const newsSlice = createSlice({
     extraReducers: (builder)=>{
 
         builder.addCase(fetchNews.rejected, (state,action)=>{
-            console.log(action.payload);
+            console.log('rejected');
             state.isLoading = false;
+            state.isSuccess = false;
             // sadece satus değeri ile yönetilebilir
         }),
         builder.addCase(fetchNews.pending, (state, action)=>{
+            console.log('pending');
             state.isLoading = true;
             state.isSuccess = false;
         }),
 
         builder.addCase(fetchNews.fulfilled, (state,action)=>{
             state.news = action.payload;
+            console.log('fullfilled');
             state.isSuccess = true;
+            state.isLoading = false;
         })
        
     }

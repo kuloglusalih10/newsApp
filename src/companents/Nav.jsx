@@ -24,7 +24,7 @@ export const Nav = () => {
 
 
   return (
-    <div className='bg-dark-red w-full h-[10%] flex items-center'>
+    <div className='bg-dark-red w-full h-[10vh] flex items-center'>
       <div className='flex items-center justify-between w-full'>
         <div className='p-4 poppins-bold text-white'>News App</div>
         <div className='p-4 hidden lg:inline lg:relative'>
