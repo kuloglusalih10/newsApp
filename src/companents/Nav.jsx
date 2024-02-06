@@ -6,6 +6,7 @@ import { Drawer } from 'antd';
 export const Nav = () => {
 
 
+  console.log("navbar yeniden yüklendi");
   const [open, setOpen] = useState(false);
   const showDrawer = () => {
     setOpen(true);
