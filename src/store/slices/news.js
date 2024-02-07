@@ -58,7 +58,7 @@ const newsSlice = createSlice({
 
         builder.addCase(fetchNews.fulfilled, (state,action)=>{
             state.news = action.payload;
-            console.log('fullfilled');
+            console.log(action.payload);
             state.isSuccess = true;
             state.isLoading = false;
         })
