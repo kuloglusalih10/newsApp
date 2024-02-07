@@ -6,7 +6,7 @@ const initialState = {
     categories : ['sondakika', 'magazin', 'spor', 'güncel', 'yerel'],
     news: [],
     isSuccess: false,
-    isLoading : true
+    isLoading : true,
 }
 
 export const fetchNews = createAsyncThunk(
@@ -40,7 +40,7 @@ const newsSlice = createSlice({
     name:'news',
     initialState,
     reducers: {
-
+        
     },
     extraReducers: (builder)=>{
 

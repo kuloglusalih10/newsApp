@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useParams} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import news, { fetchNews } from '../store/slices/news';
@@ -8,6 +8,8 @@ import { Autoplay } from 'swiper/modules'
 import 'swiper/css';
 import { Divider, Spin } from 'antd';
 import { Card } from 'antd';
+import {Modal} from 'antd';
+
 
 
 
@@ -20,6 +22,16 @@ export const Content = () => {
     const {news, isSuccess, isLoading} = useSelector(state => state.news);
     const navigate = useNavigate();
     const { Meta } = Card;
+    
+    
+
+    const [openModal, setOpenModal] = useState(false)
+    const [selectedImg, setSelectedImg] = useState('');
+    const [selectedTitle, setSelectedTitle] = useState('');
+    const [selectedDesc, setSelectedDesc] = useState('');
+    const [selectedLink, setSelectedLink] = useState('');
+
+    
 
     useEffect(()=>{
         dispatch(fetchNews(category));
@@ -107,22 +119,28 @@ export const Content = () => {
         const list = [];
 
         for (let i = 0; i < news_bottom.length; i++) {
+
+            let image = news_bottom[i]['elements'][5]['attributes']['url'];
+            let title = news_bottom[i]['elements'][0]['elements'][0]['cdata'];
+            let description = news_bottom[i]['elements'][4]['elements'][0]['cdata'];
+            let link = news_bottom[i]['elements'][1]['elements'][0]['text'];
+
             
             list.push(
 
-                <div className='cursor-pointer m-2 col-span-1 grid-rows-1 h-[200px] rounded border-2 border-solid bg-slate-100'>
+                <div key={i} onClick={async () => {await setModal(image,title,description,link); setOpenModal(true)}} className='cursor-pointer m-2 col-span-1 grid-rows-1 h-[200px] rounded border-2 border-solid bg-slate-100'>
                     <div className='flex items-start justify-start w-full h-full'>
                         <div className='flex-1 h-full rounded'>
-                            <img src={news_bottom[i]['elements'][5]['attributes']['url']}  className='rounded-tl rounded-bl w-full h-full object-cover' />
+                            <img src={image}  className='rounded-tl rounded-bl w-full h-full object-cover' />
                         </div>
                         <div className='flex-1 h-full py-2 items-start flex flex-col justify-between pl-2'>
                             <p className='text-gray-600 text-wrap poppins-medium'>
                                 {
-                                    (news_bottom[i]['elements'][0]['elements'][0]['cdata']).length > 80 
+                                    (title).length > 80 
                                         ?
-                                    news_bottom[i]['elements'][0]['elements'][0]['cdata'].substring(0,80)+ '...'
+                                    title.substring(0,80)+ '...'
                                         :
-                                    news_bottom[i]['elements'][0]['elements'][0]['cdata']
+                                    title
                                 }
                             
                             </p>
@@ -148,6 +166,14 @@ export const Content = () => {
         return list
     }
 
+    const setModal = function (image, title, description, link){
+
+        setSelectedImg(image);
+        setSelectedDesc(description);
+        setSelectedLink(link);
+        setSelectedTitle(title);
+    }
+
     return (
         <div className='content-center flex-1 items-center justify-center'>
             {
@@ -160,6 +186,7 @@ export const Content = () => {
                 : 
                    <>
                    
+                        
                         <div className='grid grid-cols-1 grid-rows-1 max-h-[90vh]'>
                             
                             <Swiper className='w-full relative ' modules={[Autoplay]} autoplay={{ delay: 9000, disableOnInteraction: false, }} speed={3000} loop={true} slidesPerView={1} >
@@ -175,14 +202,33 @@ export const Content = () => {
 
                         <div className='grid grid-cols-1 grid-rows-1 mt-8 h-[330px]'>                           
                         
+                                
                                <Swiper className='w-full py-2 relative h-full flex items-center' modules={[Autoplay]} autoplay={{ delay: 500, disableOnInteraction: false, }} speed={5000} loop={true} slidesPerView={4}>
                                     {
+                                        
                                         smallSlide(10)
                                     }
                                </Swiper>
                         </div>
 
                         <div className='grid grid-cols-3 row-auto w-full mt-4 h-max'>
+                           
+                            {
+                                openModal && 
+                                <Modal wrapClassName="vertical-center-modal" open={openModal} onCancel={() => setOpenModal(false)}
+                                     okButtonProps={{hidden: true}}
+                                >
+                                    <Card style={{ height: '100%' }} className='h-max text-center'
+                                        cover={
+                                        <img alt="example" src={selectedImg} className='w-full h-[200px]' />
+                                        }
+                                    >
+                                        {
+                                            selectedDesc
+                                        }  
+                                    </Card>
+                                </Modal>
+                            }
 
                             {
                                 bottomList()
