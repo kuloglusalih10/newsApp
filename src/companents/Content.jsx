@@ -9,6 +9,9 @@ import 'swiper/css';
 import { Divider, Spin } from 'antd';
 import { Card } from 'antd';
 import {Modal} from 'antd';
+import { link } from '@nextui-org/react';
+import defImage from '../assets/1759492.png'
+import classNames from 'classnames';
 
 
 
@@ -34,6 +37,7 @@ export const Content = () => {
     
 
     useEffect(()=>{
+        
         dispatch(fetchNews(category));
     },[navigate]);
     
@@ -41,16 +45,29 @@ export const Content = () => {
         
         const slides = [];
         
+        
         {
              for (let i = 0; i < count; i++) {
 
-                
+                let image;
+                let img = true;
+
+                if (news[i]['elements'][5]['attributes'] && news[i]['elements'][5]['attributes']['url'] !== undefined) {
+                    image = news[i]['elements'][5]['attributes']['url'];
+                } else {
+                    img = false;
+                    image = defImage;
+                }
+                let title = news[i]['elements'][0]['elements'][0]['cdata'];
+                let description = news[i]['elements'][4]['elements'][0]['cdata'];
+                let link = news[i]['elements'][1]['elements'][0]['text'];
             
+                //'object-cover w-full h-full hover:scale-110 duration-700'
                 slides.push(
-                    <SwiperSlide key={i}>
-                        <img className='w-full hover:scale-110 duration-700' src={news[i]['elements'][5]['attributes']['url']} alt="test" />
+                    <SwiperSlide key={i} onClick={() => {setModal(image,title,description,link); setOpenModal(true)}}>
+                        <img className={classNames('w-full h-full hover:scale-110 duration-700 object-contain', {'object-cover': img})} src={image}  />
                         <div className='absolute px-4 bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black flex items-end pb-10 justify-center'>
-                                <h3 className='poppins-light text-white text-4xl'>{news[i]['elements'][0]['elements'][0]['cdata']} </h3>
+                                <h3 className='poppins-light text-white text-4xl'>{title} </h3>
                         </div>
                     </SwiperSlide>
                 )
@@ -69,14 +86,20 @@ export const Content = () => {
         {
              for (let i = 0; i < count; i++) {
 
-                
+                let image;
+                let img = true;
+                if (news[i]['elements'][5]['attributes'] && news[i]['elements'][5]['attributes']['url'] !== undefined) {
+                    image = news[i]['elements'][5]['attributes']['url'];
+                } else {
+                    img = false;
+                    image = defImage;
+                }
+                let title = news[i]['elements'][0]['elements'][0]['cdata'];
+                let description = news[i]['elements'][4]['elements'][0]['cdata'];
+                let link = news[i]['elements'][1]['elements'][0]['text'];
             
                 slides.push(
-                    <SwiperSlide key={i} className='flex w-[300px] h-[300px]  justify-start  items-center  mx-2 flex-col'>
-                        {/* <img className=' duration-700 w-full h-[70%]' src={news[i]['elements'][5]['attributes']['url']} alt="test" />
-                        <div className='flex mt-2 flex-col items-center justify-center text-center'>
-                            <h3 className='poppins-light text-black text-xl'>{news[i]['elements'][0]['elements'][0]['cdata']} </h3>
-                        </div> */}
+                    <SwiperSlide key={i} onClick={() => {setModal(image,title,description,link); setOpenModal(true)}} className='flex w-[300px] h-[300px]  justify-start  items-center  mx-2 flex-col'>
 
                         <Card
                             hoverable
@@ -87,19 +110,19 @@ export const Content = () => {
                             className='h-max text-center'
                             
                             cover={
-                            <img alt="example" src={news[i]['elements'][5]['attributes']['url']} className='w-full h-[200px]' />
+                            <img alt="example" src={image} className={classNames('object-contain h-[200px]', {'object-cover': img})} />
                         }
                         >
                             {
-                                (news[i]['elements'][0]['elements'][0]['cdata']).length > 100 
+                                (title).length > 100 
                                 
                                     ? 
 
-                                (news[i]['elements'][0]['elements'][0]['cdata']).substring(0,100)+ "..."
+                                (title).substring(0,100)+ "..."
 
                                     :
 
-                                news[i]['elements'][0]['elements'][0]['cdata']
+                                title
                             }  
                         </Card>
                       
@@ -120,7 +143,12 @@ export const Content = () => {
 
         for (let i = 0; i < news_bottom.length; i++) {
 
-            let image = news_bottom[i]['elements'][5]['attributes']['url'];
+            let image;
+            if (news[i]['elements'][5]['attributes'] && news[i]['elements'][5]['attributes']['url'] !== undefined) {
+                image = news[i]['elements'][5]['attributes']['url'];
+            } else {
+                image = defImage;
+            }
             let title = news_bottom[i]['elements'][0]['elements'][0]['cdata'];
             let description = news_bottom[i]['elements'][4]['elements'][0]['cdata'];
             let link = news_bottom[i]['elements'][1]['elements'][0]['text'];
@@ -128,10 +156,10 @@ export const Content = () => {
             
             list.push(
 
-                <div key={i} onClick={async () => {await setModal(image,title,description,link); setOpenModal(true)}} className='cursor-pointer m-2 col-span-1 grid-rows-1 h-[200px] rounded border-2 border-solid bg-slate-100'>
+                <div key={i} onClick={() => {setModal(image,title,description,link); setOpenModal(true)}} className='cursor-pointer m-2 col-span-1 grid-rows-1 h-[200px] rounded border-2 border-solid bg-slate-100'>
                     <div className='flex items-start justify-start w-full h-full'>
                         <div className='flex-1 h-full rounded'>
-                            <img src={image}  className='rounded-tl rounded-bl w-full h-full object-cover' />
+                            <img src={image}  className='rounded-tl rounded-bl w-full h-full object-center' />
                         </div>
                         <div className='flex-1 h-full py-2 items-start flex flex-col justify-between pl-2'>
                             <p className='text-gray-600 text-wrap poppins-medium'>
@@ -175,9 +203,9 @@ export const Content = () => {
     }
 
     return (
-        <div className='content-center flex-1 items-center justify-center'>
+        <div className='content-center  items-center justify-center '>
             {
-                isLoading  ? 
+                isLoading ? 
                     
                     <Spin tip="Loading" fullscreen size="large">
                         <div className="content" />
@@ -200,7 +228,7 @@ export const Content = () => {
                         
                         </div>
 
-                        <div className='grid grid-cols-1 grid-rows-1 mt-8 h-[330px]'>                           
+                        <div className=' grid grid-cols-1 grid-rows-1 mt-8 h-[330px]'>                           
                         
                                 
                                <Swiper className='w-full py-2 relative h-full flex items-center' modules={[Autoplay]} autoplay={{ delay: 500, disableOnInteraction: false, }} speed={5000} loop={true} slidesPerView={4}>
@@ -211,16 +239,18 @@ export const Content = () => {
                                </Swiper>
                         </div>
 
+                        <Divider style={{color: 'red'}} className='text-white'>Geçmiş Haberler</Divider>
+
                         <div className='grid grid-cols-3 row-auto w-full mt-4 h-max'>
                            
                             {
                                 openModal && 
                                 <Modal wrapClassName="vertical-center-modal" open={openModal} onCancel={() => setOpenModal(false)}
-                                     okButtonProps={{hidden: true}}
-                                >
+                                      okType='link' okText='Detaylar' okButtonProps={{href: selectedLink, target: '_blank'}}
+                                                                  >
                                     <Card style={{ height: '100%' }} className='h-max text-center'
                                         cover={
-                                        <img alt="example" src={selectedImg} className='w-full h-[200px]' />
+                                        <img alt="example" src={selectedImg} className='object-cover w-full h-[200px]' />
                                         }
                                     >
                                         {

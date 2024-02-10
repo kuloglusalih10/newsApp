@@ -10,11 +10,12 @@ export const Layout = ({children}) => {
 
 
   return (
-    <div className='flex h-screen max-w-full flex-wrap'>
+    <>
         <Nav/>
         <Sidebar/>
-        <Outlet/>
-        
-    </div>
+        <div className='flex-1 ml-[25%]'>
+          <Outlet/>
+        </div>
+    </>
   )
 }

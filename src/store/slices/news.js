@@ -31,6 +31,7 @@ export const fetchNews = createAsyncThunk(
             } 
         }
         catch(error){
+            
             return rejectWithValue(error);
         }
     }
