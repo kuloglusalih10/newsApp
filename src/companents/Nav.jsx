@@ -298,9 +298,7 @@ export const Nav = () => {
   const onChange = (value) => {
     navigation('/'+value)
   };
-  const onSearch = (value) => {
-    console.log('search:', value);
-  };
+
   const filterOption = (input, option) =>
   (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
 
@@ -308,7 +306,7 @@ export const Nav = () => {
   return (
     <div className='bg-dark-red w-full h-[10vh] sticky top-0 z-10 flex items-center'>
       <div className='flex items-center justify-between w-full'>
-        <div className='p-4 poppins-bold text-white'>News App</div>
+        <div className='p-4 lg:ml-8 poppins-bold text-white'>News App</div>
         <div className='p-4 hidden lg:inline lg:relative'>
           {
             navLinks.map((link, index) => (
@@ -321,7 +319,7 @@ export const Nav = () => {
         </div>
         <div className='lg:hidden'>
           <Drawer title="News App" styles={{body:{backgroundColor:'#C91A25'}, }} placement='left' onClose={onClose} open={open}>
-           <div className='flex flex-col w-full text-black gap-3 '>
+           <div className='flex flex-col w-full -translate-x-1/2 text-black gap-3 '>
             {
                 navLinks.map((link, index) => (
                   <NavLink key={index} to={link.link}  className="hover:text-white poppins-bold text-white mx-2 p-2">
@@ -332,11 +330,13 @@ export const Nav = () => {
            </div>
           </Drawer>
         </div>
-        <div className='p-4'>
+        <div className='pr-4 -translate-x-1/4'>
+            <Select style={{width:'200px', height:'35px', borderRadius:'none'}} showSearch placeholder="Şehrinizin Haberleri" optionFilterProp="children" onChange={onChange} filterOption={filterOption}
+                options={iller}
+            />
+        </div>
+        <div className='p-4 lg:hidden'>
           <MenuOutlined className='text-white text-2xl lg:hidden' onClick={showDrawer}/>
-          <Select style={{width:'200px', height:'35px', borderRadius:'none'}} showSearch placeholder="Şehrinizin Haberleri" optionFilterProp="children" onChange={onChange} onSearch={onSearch} filterOption={filterOption}
-            options={iller}
-          />
         </div>
       </div>
     </div>

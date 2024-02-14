@@ -12,6 +12,7 @@ import {Modal} from 'antd';
 import { link } from '@nextui-org/react';
 import defImage from '../assets/1759492.png'
 import classNames from 'classnames';
+import { fetchForex } from '../store/slices/forex';
 
 
 
@@ -39,6 +40,7 @@ export const Content = () => {
     useEffect(()=>{
         
         dispatch(fetchNews(category));
+        //dispatch(fetchForex('test'));
     },[navigate]);
     
     const slideElements = function (count){
@@ -144,8 +146,8 @@ export const Content = () => {
         for (let i = 0; i < news_bottom.length; i++) {
 
             let image;
-            if (news[i]['elements'][5]['attributes'] && news[i]['elements'][5]['attributes']['url'] !== undefined) {
-                image = news[i]['elements'][5]['attributes']['url'];
+            if (news_bottom[i]['elements'][5]['attributes'] && news_bottom[i]['elements'][5]['attributes']['url'] !== undefined) {
+                image = news_bottom[i]['elements'][5]['attributes']['url'];
             } else {
                 image = defImage;
             }
