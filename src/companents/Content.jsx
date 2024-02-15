@@ -40,7 +40,7 @@ export const Content = () => {
     useEffect(()=>{
         
         dispatch(fetchNews(category));
-        //dispatch(fetchForex('test'));
+
     },[navigate]);
     
     const slideElements = function (count){
@@ -51,25 +51,15 @@ export const Content = () => {
         {
              for (let i = 0; i < count; i++) {
 
-                let image;
                 let img = true;
 
-                if (news[i]['elements'][5]['attributes'] && news[i]['elements'][5]['attributes']['url'] !== undefined) {
-                    image = news[i]['elements'][5]['attributes']['url'];
-                } else {
-                    img = false;
-                    image = defImage;
-                }
-                let title = news[i]['elements'][0]['elements'][0]['cdata'];
-                let description = news[i]['elements'][4]['elements'][0]['cdata'];
-                let link = news[i]['elements'][1]['elements'][0]['text'];
-            
-                //'object-cover w-full h-full hover:scale-110 duration-700'
+                news[i].image.startsWith('https://kuloglusalih10.com.tr/') ? img = false : ''
+
                 slides.push(
-                    <SwiperSlide key={i} onClick={() => {setModal(image,title,description,link); setOpenModal(true)}}>
-                        <img className={classNames('w-full h-full hover:scale-110 duration-700 object-contain', {'object-cover': img})} src={image}  />
+                    <SwiperSlide key={i} onClick={() => {setModal(news[i].image,news[i].title,news[i].description,news[i].link); setOpenModal(true)}}>
+                        <img className={classNames('w-full h-full hover:scale-110 duration-700 object-contain', {'object-cover': img})} src={news[i].image}  />
                         <div className='absolute px-4 bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black flex items-end pb-10 justify-center'>
-                                <h3 className='poppins-light text-white text-4xl'>{title} </h3>
+                                <h3 className='poppins-light text-white text-4xl'>{news[i].title} </h3>
                         </div>
                     </SwiperSlide>
                 )
@@ -88,20 +78,12 @@ export const Content = () => {
         {
              for (let i = 0; i < count; i++) {
 
-                let image;
                 let img = true;
-                if (news[i]['elements'][5]['attributes'] && news[i]['elements'][5]['attributes']['url'] !== undefined) {
-                    image = news[i]['elements'][5]['attributes']['url'];
-                } else {
-                    img = false;
-                    image = defImage;
-                }
-                let title = news[i]['elements'][0]['elements'][0]['cdata'];
-                let description = news[i]['elements'][4]['elements'][0]['cdata'];
-                let link = news[i]['elements'][1]['elements'][0]['text'];
+
+                news[i].image.startsWith('https://kuloglusalih10.com.tr/') ? img = false : ''
             
                 slides.push(
-                    <SwiperSlide key={i} onClick={() => {setModal(image,title,description,link); setOpenModal(true)}} className='flex w-[300px] h-[300px]  justify-start  items-center  mx-2 flex-col'>
+                    <SwiperSlide key={i} onClick={() => {setModal(news[i].image,news[i].title,news[i].description,news[i].link); setOpenModal(true)}} className='flex w-[300px] h-[300px]  justify-start  items-center  mx-2 flex-col'>
 
                         <Card
                             hoverable
@@ -112,19 +94,19 @@ export const Content = () => {
                             className='h-max text-center'
                             
                             cover={
-                            <img alt="example" src={image} className={classNames('object-contain h-[200px]', {'object-cover': img})} />
+                            <img alt="example" src={news[i].image} className={classNames('object-contain h-[200px]', {'object-cover': img})} />
                         }
                         >
                             {
-                                (title).length > 100 
+                                (news[i].title).length > 100 
                                 
                                     ? 
 
-                                (title).substring(0,100)+ "..."
+                                (news[i].title).substring(0,100)+ "..."
 
                                     :
 
-                                title
+                                news[i].title
                             }  
                         </Card>
                       
@@ -145,39 +127,30 @@ export const Content = () => {
 
         for (let i = 0; i < news_bottom.length; i++) {
 
-            let image;
-            if (news_bottom[i]['elements'][5]['attributes'] && news_bottom[i]['elements'][5]['attributes']['url'] !== undefined) {
-                image = news_bottom[i]['elements'][5]['attributes']['url'];
-            } else {
-                image = defImage;
-            }
-            let title = news_bottom[i]['elements'][0]['elements'][0]['cdata'];
-            let description = news_bottom[i]['elements'][4]['elements'][0]['cdata'];
-            let link = news_bottom[i]['elements'][1]['elements'][0]['text'];
 
             
             list.push(
 
-                <div key={i} onClick={() => {setModal(image,title,description,link); setOpenModal(true)}} className='cursor-pointer m-2 col-span-1 grid-rows-1 h-[200px] rounded border-2 border-solid bg-slate-100'>
+                <div key={i} onClick={() => {setModal(news_bottom[i].image,news_bottom[i].title,news_bottom[i].description,news_bottom[i].link); setOpenModal(true)}} className='cursor-pointer m-2 col-span-1 grid-rows-1 h-[200px] rounded border-2 border-solid bg-slate-100'>
                     <div className='flex items-start justify-start w-full h-full'>
                         <div className='flex-1 h-full rounded'>
-                            <img src={image}  className='rounded-tl rounded-bl w-full h-full object-center' />
+                            <img src={news_bottom[i].image}  className='rounded-tl rounded-bl w-full h-full object-center' />
                         </div>
                         <div className='flex-1 h-full py-2 items-start flex flex-col justify-between pl-2'>
                             <p className='text-gray-600 text-wrap poppins-medium'>
                                 {
-                                    (title).length > 80 
+                                    (news_bottom[i].title).length > 80 
                                         ?
-                                    title.substring(0,80)+ '...'
+                                        news_bottom[i].title.substring(0,80)+ '...'
                                         :
-                                    title
+                                        news_bottom[i].title
                                 }
                             
                             </p>
 
                             <p className='text-gray-500 text-sm'>
                                 {
-                                    (news_bottom[i]['elements'][3]['elements'][0]['text']).substring(0,24)
+                                    news_bottom[i].date
                                 }
 
                             </p>

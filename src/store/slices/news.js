@@ -13,21 +13,32 @@ export const fetchNews = createAsyncThunk(
     'news/fetchNews',
     async (category,{rejectWithValue})=>{
         try{
-            const response = await axios.request({
-                method:'GET',
-                url:`https://rss.haberler.com/rss.asp?kategori=${category}`
-            })
 
-            const stringValue = convert.xml2js(response.data);
+            let data = JSON.stringify({
+                "category": category
+              });
 
-            if((stringValue['elements'][0]['elements'][0]['elements']).length > 6){
+              let config = {
+                method: 'post',
+                maxBodyLength: Infinity,
+                url: 'http://localhost:3000/news',
+                headers: { 
+                  'Content-Type': 'application/json'
+                },
+                data : data
+              };
 
-                return ((stringValue['elements'][0]['elements'][0]['elements']).slice(6))
+            const parsedRes = await axios.request(config);
+            
+
+            if(parsedRes.data.rsp){
+
+                return (parsedRes.data.data);
 
             }
             else{
 
-                return rejectWithValue('reject hata');
+                return rejectWithValue(parsedRes.data.message);
             } 
         }
         catch(error){
@@ -46,7 +57,7 @@ const newsSlice = createSlice({
     extraReducers: (builder)=>{
 
         builder.addCase(fetchNews.rejected, (state,action)=>{
-            console.log('rejected');
+            console.log(action.error.message);
             state.isLoading = false;
             state.isSuccess = false;
             // sadece satus değeri ile yönetilebilir

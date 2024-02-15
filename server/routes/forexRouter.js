@@ -1,9 +1,9 @@
 const express = require('express');
-const { getAllnews } = require('../controllers/newsController');
 const router = express.Router();
+const {getForexs} = require('../controllers/forexController')
 
 
-router.post('/', getAllnews);
+router.get('/', getForexs);
 
 
 

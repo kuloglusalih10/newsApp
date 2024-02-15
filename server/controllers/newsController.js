@@ -9,7 +9,11 @@ const getAllnews = async (req ,res)=>{
 
         const response = await axios.request({
             method:'GET',
-            url:`https://rss.haberler.com/rss.asp?kategori=${category}`
+            url:`https://rss.haberler.com/rss.asp?kategori=${category}`,
+            headers:{
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': true
+            }
         })
 
         const stringValue = convert.xml2js(response.data);
@@ -29,7 +33,7 @@ const getAllnews = async (req ,res)=>{
                 news.link = element['elements'][1]['elements'][0]['text'];
                 news.date = (element['elements'][3]['elements'][0]['text']).substring(0,22);
                 news.description = element['elements'][4]['elements'][0]['cdata'];
-                news.image = element['elements'][5]['attributes']['url'];
+                news.image = ( element['elements'][5]['attributes'] && element['elements'][5]['attributes']['url'] !== undefined) ?  element['elements'][5]['attributes']['url'] : 'https://kuloglusalih10.com.tr/assets/1759492.png' ;
 
                 parsedNews.push(news);
 
