@@ -5,6 +5,23 @@ const initialState = {
     forexs: [],
     isSuccess: false,
     isLoading : true,
+    updatedTime : '',
+    items : [
+        {"title": "USD", "value": "Dolar"},
+        {"title": "EUR", "value": "Euro"},
+        {"title": "GBP", "value": "Sterlin"},
+        {"title": "RUB", "value": "Ruble"},
+        {"title": "gram-altin", "value": "Gram"},
+        {"title": "ceyrek-altin", "value": "Çeyrek"},
+        {"title": "yarim-altin", "value": "Yarim"},
+        {"title": "tam-altin", "value": "Tam"},
+        {"title": "cumhuriyet-altini", "value": "Cumhuriyet"},
+        {"title": "ata-altin", "value": "Ata"},
+        {"title": "14-ayar-altin", "value": "14 Ayar"},
+        {"title": "18-ayar-altin", "value": "18 Ayar"},
+        {"title": "22-ayar-bilezik", "value": "22 Ayar"},
+        {"title": "gumus", "value": "Gümüş"}
+    ]
 }
 
 export const fetchForex = createAsyncThunk(
@@ -20,14 +37,16 @@ export const fetchForex = createAsyncThunk(
 
             let config = {
                 method: 'get',
-                url: 'https://api.genelpara.com/embed/doviz.json',
-                headers: { }
+                url: 'https://finans.truncgil.com/today.json',
+                headers:{
+                    
+                }
             };
             
             
             const response  = await axios.request(config);
 
-            
+
             if(response.data){
 
                 
@@ -67,7 +86,16 @@ const forexSlice = createSlice({
         }),
 
         builder.addCase(fetchForex.fulfilled, (state,action)=>{
-            state.forexs = action.payload;
+
+            state.forexs = [];
+            let data = action.payload;
+            state.items.map((item)=>{
+                data[item.title]['title'] = item.value; 
+                state.forexs.push(data[item.title]);
+            });
+
+            state.updatedTime = data['Update_Date'];
+
             state.isSuccess = true;
             state.isLoading = false;
         })

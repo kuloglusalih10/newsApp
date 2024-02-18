@@ -13,6 +13,7 @@ import { link } from '@nextui-org/react';
 import defImage from '../assets/1759492.png'
 import classNames from 'classnames';
 import { fetchForex } from '../store/slices/forex';
+import { Sidebar } from './Sidebar';
 
 
 
@@ -83,12 +84,12 @@ export const Content = () => {
                 news[i].image.startsWith('https://kuloglusalih10.com.tr/') ? img = false : ''
             
                 slides.push(
-                    <SwiperSlide key={i} onClick={() => {setModal(news[i].image,news[i].title,news[i].description,news[i].link); setOpenModal(true)}} className='flex w-[300px] h-[300px]  justify-start  items-center  mx-2 flex-col'>
+                    <SwiperSlide key={i} onClick={() => {setModal(news[i].image,news[i].title,news[i].description,news[i].link); setOpenModal(true)}} className='flex  justify-start  items-center flex-col'>
 
                         <Card
                             hoverable
                             style={{
-                            width: 300,
+                            
                             height: '100%'
                             }}
                             className='h-max text-center'
@@ -178,7 +179,7 @@ export const Content = () => {
     }
 
     return (
-        <div className='content-center  items-center justify-center '>
+        <div className='content-center w-[100%]'>
             {
                 isLoading ? 
                     
@@ -190,29 +191,48 @@ export const Content = () => {
                    <>
                    
                         
-                        <div className='grid grid-cols-1 grid-rows-1 max-h-[90vh]'>
+                        <div className=' w-full max-h-[90vh]'>
                             
-                            <Swiper className='w-full relative ' modules={[Autoplay]} autoplay={{ delay: 9000, disableOnInteraction: false, }} speed={3000} loop={true} slidesPerView={1} >
+                            <Swiper  className='w-full relative ' modules={[Autoplay]} autoplay={{ delay: 9000, disableOnInteraction: false, }} speed={3000} loop={true} slidesPerView={1}
+                            >
                                 {
                                     slideElements(3)
                                 } 
                             </Swiper>
-
-
+                        </div>
                             
                         
-                        </div>
+                        
 
                         <div className=' grid grid-cols-1 grid-rows-1 mt-8 h-[330px]'>                           
                         
                                 
-                               <Swiper className='w-full py-2 relative h-full flex items-center' modules={[Autoplay]} autoplay={{ delay: 500, disableOnInteraction: false, }} speed={5000} loop={true} slidesPerView={4}>
+                               <Swiper className='w-full py-2 relative h-full flex items-center' modules={[Autoplay]} autoplay={{ delay: 500, disableOnInteraction: false, }} speed={5000} loop={true} slidesPerView={4} breakpoints={{
+                                    320: {
+                                        slidesPerView: 1,
+                                        spaceBetween:40
+                                    },
+                                    // when window width is >= 480px
+                                    480: {
+                                        slidesPerView: 2,
+                                    },
+                                    // when window width is >= 640px
+                                    640: {
+                                        slidesPerView: 3,
+                                        spaceBetween:40
+                                    }
+                                }}>
                                     {
                                         
                                         smallSlide(10)
                                     }
                                </Swiper>
                         </div>
+
+                        {
+                            category == 'ekonomi'  && <Sidebar/>
+                        }
+                        
 
                         <Divider style={{color: 'red'}} className='text-white'>Geçmiş Haberler</Divider>
 

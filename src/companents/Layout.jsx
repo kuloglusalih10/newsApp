@@ -12,8 +12,7 @@ export const Layout = ({children}) => {
   return (
     <>
         <Nav/>
-        <Sidebar/>
-        <div className='flex-1 ml-[25%]'>
+        <div className='mx-auto w-3/5'>
           <Outlet/>
         </div>
     </>
