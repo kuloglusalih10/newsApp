@@ -7,7 +7,7 @@ import { Footer } from 'antd/es/layout/layout';
 import classNames from 'classnames';
 
 
-export const Sidebar = () => {
+export const Table = () => {
 
   let forexs = useSelector(state => state.forex.forexs);
   const {isSuccess, isLoading} = useSelector(state => state.forex);
@@ -17,7 +17,6 @@ export const Sidebar = () => {
   },[forexs])
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(()=>{
 
@@ -36,7 +35,7 @@ export const Sidebar = () => {
                 
                 : 
 
-              <div className=' flex flex-col items-center overflow-hidden  justify-center h-[90vh] px-3  pt-2'>
+              <div className=' flex flex-col items-center overflow-hidden  justify-center px-4 md:px-10 lg:px-52  pt-2'>
                   <table className='w-full rounded-t border-[#4a72d7] border overflow-hidden'>
                     <thead className='bg-[#4a72d7]   text-white '>
                       <tr className='border-[#4a72d7] border rounded-t overflow-hidden'>
@@ -78,7 +77,7 @@ export const Sidebar = () => {
 
                   </table>
 
-                  <a href="https://www.haberler.com/finans/"  className='w-full p-4 bg-[#4a72d7] rounded-md text-center text-white font-semibold mt-4'>
+                  <a href="https://www.haberler.com/finans/"  className='w-full  p-4 bg-[#4a72d7] rounded-md text-center text-white font-semibold mt-4'>
                       Finans Sayfasına Git
                   </a>
               </div>

@@ -306,7 +306,7 @@ export const Nav = () => {
   return (
     <div className='bg-dark-red w-full h-[10vh] sticky top-0 z-10 flex items-center'>
       <div className='flex items-center justify-between w-full'>
-        <div className='p-4 lg:ml-8 poppins-bold text-white'>News App</div>
+        <div className='p-4 hidden sm:inline lg:ml-8 poppins-bold text-white'>News App</div>
         <div className='p-4 hidden lg:inline lg:relative'>
           {
             navLinks.map((link, index) => (
@@ -318,19 +318,19 @@ export const Nav = () => {
 
         </div>
         <div className='lg:hidden'>
-          <Drawer title="News App" styles={{body:{backgroundColor:'#C91A25'}, }} placement='left' onClose={onClose} open={open}>
-           <div className='flex flex-col w-full -translate-x-1/2 text-black gap-3 '>
+          <Drawer title="News App" styles={{body:{backgroundColor:'#C91A25', color:'white'}, }} placement='left' onClose={onClose} open={open}>
+           <div className='flex flex-col  text-white gap-3 '>
             {
                 navLinks.map((link, index) => (
-                  <NavLink key={index} to={link.link}  className="hover:text-white poppins-bold text-white mx-2 p-2">
+                  <NavLink key={index} to={link.link}  className="text-white hover:text-white  poppins-bold p-2">
                     {link.title}
                   </NavLink>
                 ))
-              }
+            }
            </div>
           </Drawer>
         </div>
-        <div className='pr-4 -translate-x-1/4'>
+        <div className='sm:pr-4 mr-auto sm:mr-0 sm:ml-0 ml-3 sm:-translate-x-1/4'>
             <Select style={{width:'200px', height:'35px', borderRadius:'none'}} showSearch placeholder="Şehrinizin Haberleri" optionFilterProp="children" onChange={onChange} filterOption={filterOption}
                 options={iller}
             />

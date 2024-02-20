@@ -1,8 +1,8 @@
 import './App.css'
 import { Layout } from './companents/Layout'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Content } from './companents/Content';
-import { NotFound } from './companents/NotFound';
+import { Content } from './sections/Content';
+import { NotFound } from './sections/NotFound';
 import { Provider } from 'react-redux';
 import store from './store/store';
 
