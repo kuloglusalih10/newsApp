@@ -1,27 +1,38 @@
 import './App.css'
 import { Layout } from './companents/Layout'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Content } from './sections/Content';
 import { NotFound } from './sections/NotFound';
-import { Provider } from 'react-redux';
-import store from './store/store';
+
+import { useDispatch, useSelector } from 'react-redux';
 
 
 function App() {
 
+  const {categories} = useSelector(state => state.news);
+  const {cities} = useSelector(state => state.news);
 
   return (
     <>
       <BrowserRouter>
-        <Provider store={store}>
+        
           <Routes>
-            <Route path='/:category' element={<Layout/>}>
-              <Route index={true} element={<Content/>}/>
+            <Route path='/' element={<Layout/>}>
+              <Route path='/' element={<Navigate to="/sondakika" replace />} />
             </Route>
+            {categories.map(category => (
+              <Route key={category} path={`/${category}`} element={<Layout/>}>
+                <Route index={true} element={<Content/>}/>
+              </Route>
+            ))}
+            {cities.map(city => (
+              <Route key={city} path={`/${city.value}`} element={<Layout/>}>
+                <Route index={true} element={<Content/>}/>
+              </Route>
+            ))}
             <Route path='*' element={<NotFound/>}/>
           </Routes>
-        </Provider>
-          
+        
       </BrowserRouter>
       
     </>

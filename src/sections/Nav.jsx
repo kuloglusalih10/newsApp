@@ -3,18 +3,21 @@ import { NavLink } from "react-router-dom";
 import {MenuOutlined} from '@ant-design/icons'
 import { Drawer,Select } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const Nav = () => {
 
   const navigation = useNavigate();
-
   const [open, setOpen] = useState(false);
+
   const showDrawer = () => {
     setOpen(true);
   };
+
   const onClose = () => {
     setOpen(false);
   };
+
   const navLinks = [
     {"link": '/sondakika', "title": 'Son Dakika'},
     {"link": '/güncel', "title": 'Güncel'},
@@ -24,276 +27,7 @@ export const Nav = () => {
 
   ];
 
-  const iller = [
-    {
-        "value": "Adana",
-        "label": "Adana"
-    },
-    {
-        "value": "Adıyaman",
-        "label": "Adıyaman"
-    },
-    {
-        "value": "Afyonkarahisar",
-        "label": "Afyonkarahisar"
-    },
-    {
-        "value": "Ağrı",
-        "label": "Ağrı"
-    },
-    {
-        "value": "Amasya",
-        "label": "Amasya"
-    },
-    {
-        "value": "Ankara",
-        "label": "Ankara"
-    },
-    {
-        "value": "Antalya",
-        "label": "Antalya"
-    },
-    {
-        "value": "Artvin",
-        "label": "Artvin"
-    },
-    {
-        "value": "Aydın",
-        "label": "Aydın"
-    },
-    {
-        "value": "Balıkesir",
-        "label": "Balıkesir"
-    },
-    {
-        "value": "Bilecik",
-        "label": "Bilecik"
-    },
-    {
-        "value": "Bingöl",
-        "label": "Bingöl"
-    },
-    {
-        "value": "Bitlis",
-        "label": "Bitlis"
-    },
-    {
-        "value": "Bolu",
-        "label": "Bolu"
-    },
-    {
-        "value": "Burdur",
-        "label": "Burdur"
-    },
-    {
-        "value": "Bursa",
-        "label": "Bursa"
-    },
-    {
-        "value": "Çanakkale",
-        "label": "Çanakkale"
-    },
-    {
-        "value": "Çankırı",
-        "label": "Çankırı"
-    },
-    {
-        "value": "Çorum",
-        "label": "Çorum"
-    },
-    {
-        "value": "Denizli",
-        "label": "Denizli"
-    },
-    {
-        "value": "Diyarbakir",
-        "label": "Diyarbakir"
-    },
-    {
-        "value": "Edirne",
-        "label": "Edirne"
-    },
-    {
-        "value": "Elazığ",
-        "label": "Elazığ"
-    },
-    {
-        "value": "Erzincan",
-        "label": "Erzincan"
-    },
-    {
-        "value": "Erzurum",
-        "label": "Erzurum"
-    },
-    {
-        "value": "Eskişehir",
-        "label": "Eskişehir"
-    },
-    {
-        "value": "Gaziantep",
-        "label": "Gaziantep"
-    },
-    {
-        "value": "Giresun",
-        "label": "Giresun"
-    },
-    {
-        "value": "Gümüşhane",
-        "label": "Gümüşhane"
-    },
-    {
-        "value": "Hakkari",
-        "label": "Hakkari"
-    },
-    {
-        "value": "Hatay",
-        "label": "Hatay"
-    },
-    {
-        "value": "Isparta",
-        "label": "Isparta"
-    },
-    {
-        "value": "Mersin",
-        "label": "Mersin"
-    },
-    {
-        "value": "İstanbul",
-        "label": "İstanbul"
-    },
-    {
-        "value": "İzmir",
-        "label": "İzmir"
-    },
-    {
-        "value": "Kars",
-        "label": "Kars"
-    },
-    {
-        "value": "Kastamonu",
-        "label": "Kastamonu"
-    },
-    {
-        "value": "Kayseri",
-        "label": "Kayseri"
-    },
-    {
-        "value": "Kırklareli",
-        "label": "Kırklareli"
-    },
-    {
-        "value": "Kırşehir",
-        "label": "Kırşehir"
-    },
-    {
-        "value": "Kocaeli",
-        "label": "Kocaeli"
-    },
-    {
-        "value": "Konya",
-        "label": "Konya"
-    },
-    {
-        "value": "Kütahya",
-        "label": "Kütahya"
-    },
-    {
-        "value": "Malatya",
-        "label": "Malatya"
-    },
-    {
-        "value": "Manisa",
-        "label": "Manisa"
-    },
-    {
-        "value": "Kahramanmaraş",
-        "label": "Kahramanmaraş"
-    },
-    {
-        "value": "Mardin",
-        "label": "Mardin"
-    },
-    {
-        "value": "Muğla",
-        "label": "Muğla"
-    },
-    {
-        "value": "Muş",
-        "label": "Muş"
-    },
-    {
-        "value": "Nevşehir",
-        "label": "Nevşehir"
-    },
-    {
-        "value": "Niğde",
-        "label": "Niğde"
-    },
-    {
-        "value": "Ordu",
-        "label": "Ordu"
-    },
-    {
-        "value": "Rize",
-        "label": "Rize"
-    },
-    {
-        "value": "Sakarya",
-        "label": "Sakarya"
-    },
-    {
-        "value": "Samsun",
-        "label": "Samsun"
-    },
-    {
-        "value": "Siirt",
-        "label": "Siirt"
-    },
-    {
-        "value": "Sinop",
-        "label": "Sinop"
-    },
-    {
-        "value": "Sivas",
-        "label": "Sivas"
-    },
-    {
-        "value": "Tekirdağ",
-        "label": "Tekirdağ"
-    },
-    {
-        "value": "Tokat",
-        "label": "Tokat"
-    },
-    {
-        "value": "Trabzon",
-        "label": "Trabzon"
-    },
-    {
-        "value": "Tunceli",
-        "label": "Tunceli"
-    },
-    {
-        "value": "Şanlıurfa",
-        "label": "Şanlıurfa"
-    },
-    {
-        "value": "Uşak",
-        "label": "Uşak"
-    },
-    {
-        "value": "Van",
-        "label": "Van"
-    },
-    {
-        "value": "Yozgat",
-        "label": "Yozgat"
-    },
-    {
-        "value": "Zonguldak",
-        "label": "Zonguldak"
-    },
-  ];
+  const {cities} = useSelector(state => state.news);
 
   const onChange = (value) => {
     navigation('/'+value)
@@ -322,7 +56,7 @@ export const Nav = () => {
            <div className='flex flex-col  text-white gap-3 '>
             {
                 navLinks.map((link, index) => (
-                  <NavLink key={index} to={link.link}  className="text-white hover:text-white  poppins-bold p-2">
+                  <NavLink key={index} to={link.link} onClick={()=>setOpen(false)}  className="text-white hover:text-white  poppins-bold p-2">
                     {link.title}
                   </NavLink>
                 ))
@@ -332,7 +66,7 @@ export const Nav = () => {
         </div>
         <div className='sm:pr-4 mr-auto sm:mr-0 sm:ml-0 ml-3 sm:-translate-x-1/4'>
             <Select style={{width:'200px', height:'35px', borderRadius:'none'}} showSearch placeholder="Şehrinizin Haberleri" optionFilterProp="children" onChange={onChange} filterOption={filterOption}
-                options={iller}
+                options={cities}
             />
         </div>
         <div className='p-4 lg:hidden'>

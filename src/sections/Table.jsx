@@ -2,8 +2,6 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { fetchForex } from '../store/slices/forex';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { Footer } from 'antd/es/layout/layout';
 import classNames from 'classnames';
 
 
@@ -11,10 +9,6 @@ export const Table = () => {
 
   let forexs = useSelector(state => state.forex.forexs);
   const {isSuccess, isLoading} = useSelector(state => state.forex);
-
-  useEffect(()=>{
-    console.log(forexs);
-  },[forexs])
 
   const dispatch = useDispatch();
 
@@ -25,7 +19,7 @@ export const Table = () => {
   },[])
 
   return (
-      <div className=''>
+      <>
         {
             isLoading 
 
@@ -82,7 +76,7 @@ export const Table = () => {
                   </a>
               </div>
           }
-    </div>
+    </>
   )
 
   

@@ -1,5 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { timeAgo } from '../hooks/day';
+import { motion } from "framer-motion"
 
 export const BottomList = ({setModal, setOpenModal}) => {
 
@@ -16,7 +18,18 @@ export const BottomList = ({setModal, setOpenModal}) => {
             
             list.push(
 
-                <div key={i} onClick={() => {setModal(news_bottom[i].image,news_bottom[i].title,news_bottom[i].description,news_bottom[i].link); setOpenModal(true)}} className='cursor-pointer m-2 col-span-1 grid-rows-1 h-[200px] rounded border-2 border-solid bg-slate-100'>
+                <motion.div  
+                    
+                    // initial={{ opacity: 0, x:  "100px" }}
+                    // whileInView={{ opacity: 1, x:0 }}
+                    initial={{ opacity: 0, x: "100px", }} // Başlangıçta sağdan ekranın dışında başlar
+                    animate={{ opacity: 1, x: 0 }} // Animasyonla ekranın içine doğru hareket eder ve opaklık artar
+                    transition={{ duration: 0.5, delay: i/3 }} 
+                    viewport={{ once: true }}
+
+                    
+                    
+                key={i} onClick={() => {setModal(news_bottom[i].image,news_bottom[i].title,news_bottom[i].description,news_bottom[i].link); setOpenModal(true)}} className='cursor-pointer m-2 col-span-1 grid-rows-1 h-[200px] rounded border-2 border-solid bg-slate-100'>
                     <div className='flex items-start justify-start w-full h-full'>
                         <div className='flex-1 h-full rounded'>
                             <img src={news_bottom[i].image}  className='rounded-tl rounded-bl w-full h-full object-center' />
@@ -35,7 +48,10 @@ export const BottomList = ({setModal, setOpenModal}) => {
 
                             <p className='text-gray-500 text-sm'>
                                 {
-                                    news_bottom[i].date
+
+                                    timeAgo(news_bottom[i].date)
+                                    //news_bottom[i].date
+                                    
                                 }
 
                             </p>
@@ -44,7 +60,7 @@ export const BottomList = ({setModal, setOpenModal}) => {
 
                     </div>
 
-                </div>
+                </motion.div>
 
             )
 

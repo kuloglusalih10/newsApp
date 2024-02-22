@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import {useParams} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import  { fetchNews } from '../store/slices/news';
 import { useNavigate} from 'react-router-dom';
@@ -11,6 +10,7 @@ import { Table } from './Table';
 import { HeroSlide } from '../companents/HeroSlide';
 import { SubSlide } from '../companents/SubSlide';
 import { BottomList } from '../companents/BottomList';
+import { useLocation } from 'react-router-dom';
 
 
 
@@ -19,13 +19,14 @@ import { BottomList } from '../companents/BottomList';
 
 export const Content = () => {
 
-    let { category } = useParams();
-    const dispatch = useDispatch();
-    const {isLoading} = useSelector(state => state.news);
-    const navigate = useNavigate();
+    
 
+    // let { category } = useParams();
+    const location = useLocation();
+    const pathname = location.pathname;
+    const category = pathname.split('/')[1];
     
-    
+    console.log(category);
 
     const [openModal, setOpenModal] = useState(false)
     const [selectedImg, setSelectedImg] = useState('');
@@ -33,6 +34,10 @@ export const Content = () => {
     const [selectedDesc, setSelectedDesc] = useState('');
     const [selectedLink, setSelectedLink] = useState('');
 
+
+    const dispatch = useDispatch();
+    const {isLoading} = useSelector(state => state.news);
+    const navigate = useNavigate();
     
 
     useEffect(()=>{
@@ -82,7 +87,7 @@ export const Content = () => {
                                                                   >
                                     <Card style={{ height: '100%' }} className='h-max text-center'
                                         cover={
-                                        <img alt="example" src={selectedImg} className='object-cover w-full h-[200px]' />
+                                        <img alt="example" src={selectedImg} className='object-fill w-full h-[200px]' />
                                         }
                                     >
                                         {
