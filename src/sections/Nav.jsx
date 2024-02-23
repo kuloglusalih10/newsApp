@@ -4,6 +4,9 @@ import {MenuOutlined} from '@ant-design/icons'
 import { Drawer,Select } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import logo from '../assets/newsLogo.png';
+import { ImLinkedin } from "react-icons/im";
+import { FaDizzy, FaGithubSquare } from "react-icons/fa";
 
 export const Nav = () => {
 
@@ -27,6 +30,20 @@ export const Nav = () => {
 
   ];
 
+  const social = <>
+    <div className='flex w-full justify-center items-center gap-x-3'>
+      <a href="https://www.linkedin.com/in/salih-kulo%C4%9Flu-7201a6241/" target='_blank'>
+        <ImLinkedin color='#1c1e23' size={25} />
+      </a>
+
+      <a href="https://github.com/kuloglusalih10" target='_blank'>
+        <FaGithubSquare color='#1c1e23' size={28.5}  />
+      </a>
+      
+      
+    </div>
+  </>
+
   const {cities} = useSelector(state => state.news);
 
   const onChange = (value) => {
@@ -38,13 +55,15 @@ export const Nav = () => {
 
 
   return (
-    <div className='bg-dark-red w-full h-[10vh] sticky top-0 z-10 flex items-center'>
-      <div className='flex items-center justify-between w-full'>
-        <div className='p-4 hidden sm:inline lg:ml-8 poppins-bold text-white'>News App</div>
+    <div className='bg-dark-gray w-full h-[10vh] sticky top-0 z-10 flex items-center'>
+      <div className='flex items-center justify-between w-full px-8 h-[10vh]'>
+        <div className='inline  poppins-bold text-white'>
+          <img src={logo} alt="Logo" width={145} style={{height:'10vh', objectFit:'cover'}} />
+        </div>
         <div className='p-4 hidden lg:inline lg:relative'>
           {
             navLinks.map((link, index) => (
-              <NavLink key={index} to={link.link}  className="poppins-regular text-white mx-2 p-2">
+              <NavLink key={index} to={link.link}  className="poppins-regular text-[16px] text-white mx-2 p-2">
                 {link.title}
               </NavLink>
             ))
@@ -52,7 +71,7 @@ export const Nav = () => {
 
         </div>
         <div className='lg:hidden'>
-          <Drawer title="News App" styles={{body:{backgroundColor:'#C91A25', color:'white'}, }} placement='left' onClose={onClose} open={open}>
+          <Drawer title="News App" styles={{body:{backgroundColor:'#1c1e23', color:'white'}, }} placement='left' onClose={onClose} open={open} footer={social} >
            <div className='flex flex-col  text-white gap-3 '>
             {
                 navLinks.map((link, index) => (
@@ -62,12 +81,26 @@ export const Nav = () => {
                 ))
             }
            </div>
+           
+
           </Drawer>
         </div>
-        <div className='sm:pr-4 mr-auto sm:mr-0 sm:ml-0 ml-3 sm:-translate-x-1/4'>
-            <Select style={{width:'200px', height:'35px', borderRadius:'none'}} showSearch placeholder="Şehrinizin Haberleri" optionFilterProp="children" onChange={onChange} filterOption={filterOption}
+        <div className='sm:pr-4 mr-auto hidden lg:inline sm:mr-0 sm:ml-0 ml-3 '>
+            {/* <Select style={{width:'200px', height:'35px', borderRadius:'none'}} showSearch placeholder="Şehrinizin Haberleri" optionFilterProp="children" onChange={onChange} filterOption={filterOption}
                 options={cities}
-            />
+            /> */}
+            <div className='flex w-full items-center gap-x-3'>
+              <a href="https://www.linkedin.com/in/salih-kulo%C4%9Flu-7201a6241/" target='_blank'>
+                <ImLinkedin color='white' size={25} />
+              </a>
+
+              <a href="https://github.com/kuloglusalih10" target='_blank'>
+                <FaGithubSquare color='white' size={28.5}  />
+              </a>
+              
+              
+            </div>
+            
         </div>
         <div className='p-4 lg:hidden'>
           <MenuOutlined className='text-white text-2xl lg:hidden' onClick={showDrawer}/>

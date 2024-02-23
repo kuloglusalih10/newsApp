@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        'dark-red': '#C91A25',
+        'dark-red': '#e01d20',
+        'dark-gray': '#1c1e23'
       }
     },
   },
