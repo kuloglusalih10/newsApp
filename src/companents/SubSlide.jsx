@@ -60,7 +60,7 @@ export const SubSlide = ({setModal, setOpenModal}) => {
     }
 
   return (
-    <div className=' grid mt-8  h-[380px] w-full'>                           
+    <div className=' mt-8  h-[380px] w-full'>                           
                         
                                 
                                <Swiper className='w-full py-6 relative h-full flex items-center' modules={[Autoplay]} autoplay={{ delay: 500, disableOnInteraction: false, }} speed={5000} loop={true} slidesPerView={4} breakpoints={{

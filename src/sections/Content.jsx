@@ -55,7 +55,7 @@ export const Content = () => {
     }
 
     return (
-        <div className='content-center w-[100%]'>
+        <div className='content-center bg-light-gray w-[100%]'>
             {
                 isLoading ? 
                     
@@ -65,7 +65,7 @@ export const Content = () => {
                     
                 : 
                    <>
-                        <HeroSlide count={3} setModal={setModal} setOpenModal={setOpenModal}/>
+                        <HeroSlide count={5} setModal={setModal} setOpenModal={setOpenModal}/>
 
                         <SubSlide setModal={setModal} setOpenModal={setOpenModal}/>
 

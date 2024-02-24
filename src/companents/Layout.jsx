@@ -11,7 +11,7 @@ export const Layout = ({children}) => {
   return (
     <>
         <Nav/>
-        <div className='mx-auto w-full'>
+        <div className='mx-auto w-full bg-light-gray 2xl:px-20'>
           <Outlet/>
         </div>
     </>

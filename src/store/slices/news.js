@@ -3,7 +3,7 @@ import axios from "axios";
 import convert from 'xml-js';
 
 const initialState = {
-    categories : ['sondakika', 'magazin', 'spor', 'güncel', 'yerel','ekonomi'],
+    categories : ['sondakika', 'magazin', 'spor', 'dünya', 'yerel','ekonomi'],
     news: [],
     isSuccess: false,
     isLoading : true,

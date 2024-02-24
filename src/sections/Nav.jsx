@@ -23,7 +23,7 @@ export const Nav = () => {
 
   const navLinks = [
     {"link": '/sondakika', "title": 'Son Dakika'},
-    {"link": '/güncel', "title": 'Güncel'},
+    {"link": '/dünya', "title": 'Dünya'},
     {"link": '/spor', "title": 'Spor'},
     {"link": '/ekonomi', "title": 'Ekonomi'},
     {"link": '/magazin', "title": 'Magazin'},
@@ -82,7 +82,6 @@ export const Nav = () => {
             }
            </div>
            
-
           </Drawer>
         </div>
         <div className='sm:pr-4 mr-auto hidden lg:inline sm:mr-0 sm:ml-0 ml-3 '>
