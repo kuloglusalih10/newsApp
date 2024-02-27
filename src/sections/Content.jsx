@@ -11,6 +11,7 @@ import { HeroSlide } from '../companents/HeroSlide';
 import { SubSlide } from '../companents/SubSlide';
 import { BottomList } from '../companents/BottomList';
 import { useLocation } from 'react-router-dom';
+import classNames from 'classnames';
 
 
 
@@ -74,7 +75,7 @@ export const Content = () => {
                         }
                         
 
-                        <Divider style={{color: 'red'}} className='text-white'>Geçmiş Haberler</Divider>
+                        <Divider style={{color: 'black'}} className='text-white'>Geçmiş Haberler</Divider>
 
 
                         {
@@ -87,7 +88,7 @@ export const Content = () => {
                                                                   >
                                     <Card style={{ height: '100%' }} className='h-max text-center'
                                         cover={
-                                        <img alt="example" src={selectedImg} className='object-fill w-full h-[200px]' />
+                                        <img alt="example" src={selectedImg} className={classNames('  object-fill w-full h-[200px]',{'bg-dark-gray' : selectedImg.startsWith('https://kuloglusalih10.com.tr/') })} />
                                         }
                                     >
                                         {

@@ -18,21 +18,21 @@ export const BottomList = ({setModal, setOpenModal}) => {
             
             list.push(
 
-                <motion.div  
+                <div  
                     
                     // initial={{ opacity: 0, x:  "100px" }}
                     // whileInView={{ opacity: 1, x:0 }}
-                    initial={{ opacity: 0, x: "100px", }} // Başlangıçta sağdan ekranın dışında başlar
-                    animate={{ opacity: 1, x: 0 }} // Animasyonla ekranın içine doğru hareket eder ve opaklık artar
-                    transition={{ duration: 0.5, delay: i/3 }} 
-                    viewport={{ once: true }}
+                    // initial={{ opacity: 0, x: "100px", }} // Başlangıçta sağdan ekranın dışında başlar
+                    // animate={{ opacity: 1, x: 0 }} // Animasyonla ekranın içine doğru hareket eder ve opaklık artar
+                    // transition={{ duration: 0.5, delay: i/3 }} 
+                    // viewport={{ once: true }}
 
                     
                     
-                key={i} onClick={() => {setModal(news_bottom[i].image,news_bottom[i].title,news_bottom[i].description,news_bottom[i].link); setOpenModal(true)}} className='cursor-pointer m-2 col-span-1 grid-rows-1 h-[200px] rounded border-2 border-solid bg-slate-100'>
+                key={i} onClick={() => {setModal(news_bottom[i].image,news_bottom[i].title,news_bottom[i].description,news_bottom[i].link); setOpenModal(true)}} className='cursor-pointer m-2 col-span-1 grid-rows-1 h-[200px] rounded border-2 border-solid bg-white'>
                     <div className='flex items-start justify-start w-full h-full'>
                         <div className='flex-1 h-full rounded'>
-                            <img src={news_bottom[i].image}  className='rounded-tl rounded-bl w-full h-full object-center' />
+                            <img src={news_bottom[i].image}  className='rounded-tl bg-dark-gray rounded-bl w-full h-full object-center' />
                         </div>
                         <div className='flex-1 h-full py-2 items-start flex flex-col justify-between pl-2'>
                             <p className='text-gray-600 text-wrap poppins-medium'>
@@ -60,7 +60,7 @@ export const BottomList = ({setModal, setOpenModal}) => {
 
                     </div>
 
-                </motion.div>
+                </div>
 
             )
 

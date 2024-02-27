@@ -13,6 +13,7 @@ export const Nav = () => {
   const navigation = useNavigate();
   const [open, setOpen] = useState(false);
 
+
   const showDrawer = () => {
     setOpen(true);
   };
@@ -72,7 +73,7 @@ export const Nav = () => {
         </div>
         <div className='lg:hidden'>
           <Drawer title="News App" styles={{body:{backgroundColor:'#1c1e23', color:'white'}, }} placement='left' onClose={onClose} open={open} footer={social} >
-           <div className='flex flex-col  text-white gap-3 '>
+           <div className='flex flex-col  text-white gap-3 ' >
             {
                 navLinks.map((link, index) => (
                   <NavLink key={index} to={link.link} onClick={()=>setOpen(false)}  className="text-white hover:text-white  poppins-bold p-2">

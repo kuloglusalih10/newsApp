@@ -9,7 +9,8 @@ export default {
       colors: {
         'dark-red': '#e01d20',
         'dark-gray': '#1c1e23',
-        'light-gray' :'#fafafa'
+        'light-gray' :'#fafafa',
+        'blue' : '#099CFF'
       }
     },
   },

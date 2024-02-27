@@ -3,6 +3,7 @@ import axios from "axios";
 
 const initialState = {
     forexs: [],
+    goldens:[],
     isSuccess: false,
     isLoading : true,
     updatedTime : '',
@@ -11,6 +12,12 @@ const initialState = {
         {"title": "EUR", "value": "Euro"},
         {"title": "GBP", "value": "Sterlin"},
         {"title": "RUB", "value": "Ruble"},
+        {"title": "CNY", "value": "Çin Yuanı"},
+        {"title": "CAD", "value": "Kanada Doları"},
+        {"title": "SEK", "value": "İsveç Kronu"},
+        {"title": "AED", "value": "Dirhem"},
+        {"title": "ARS", "value": "Arjantin pesosu"},
+        {"title": "BGN", "value": "Bulgar Levası"},
         {"title": "gram-altin", "value": "Gram"},
         {"title": "ceyrek-altin", "value": "Çeyrek"},
         {"title": "yarim-altin", "value": "Yarim"},
@@ -87,11 +94,15 @@ const forexSlice = createSlice({
 
         builder.addCase(fetchForex.fulfilled, (state,action)=>{
 
+            console.log(action.payload);
             state.forexs = [];
+            state.goldens = [];
             let data = action.payload;
-            state.items.map((item)=>{
+            state.items.map((item, index)=>{
                 data[item.title]['title'] = item.value; 
-                state.forexs.push(data[item.title]);
+                data[item.title]['sembol'] = item.title; 
+                index < 10 ? state.forexs.push(data[item.title]) : state.goldens.push(data[item.title])
+                
             });
 
             state.updatedTime = data['Update_Date'];

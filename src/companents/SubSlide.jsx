@@ -22,7 +22,7 @@ export const SubSlide = ({setModal, setOpenModal}) => {
                 news[i].image.startsWith('https://kuloglusalih10.com.tr/') ? img = false : ''
             
                 slides.push(
-                    <SwiperSlide key={i} onClick={() => {setModal(news[i].image,news[i].title,news[i].description,news[i].link); setOpenModal(true)}} className='flex items-center flex-col'>
+                    <SwiperSlide key={i} onClick={() => {setModal(news[i].image,news[i].title,news[i].description,news[i].link); setOpenModal(true)}} className='flex items-center flex-col '>
 
                         <Card
                             hoverable
@@ -33,7 +33,7 @@ export const SubSlide = ({setModal, setOpenModal}) => {
                             className='h-max text-center '
                             
                             cover={
-                            <img alt="example" src={news[i].image} className={classNames('object-contain h-[200px]', {'object-fill': img})} />
+                            <img alt="example" src={news[i].image} className={classNames('bg-dark-gray object-contain h-[200px]', {'object-fill': img})} />
                             }
                         >
                             {
@@ -60,35 +60,33 @@ export const SubSlide = ({setModal, setOpenModal}) => {
     }
 
   return (
-    <div className=' mt-8  h-[380px] w-full'>                           
-                        
-                                
-                               <Swiper className='w-full py-6 relative h-full flex items-center' modules={[Autoplay]} autoplay={{ delay: 500, disableOnInteraction: false, }} speed={5000} loop={true} slidesPerView={4} breakpoints={{
-                                    
-                                    // when window width is >= 480px
-                                    180: {
-                                        slidesPerView: 1,
-                                        spaceBetween:15
-                                    },
-                                    730: {
-                                        slidesPerView: 2,
-                                        spaceBetween:15
-                                    },
-                                    800: {
-                                        slidesPerView: 3,
-                                        spaceBetween:15
-                                    },
-                                    // when window width is >= 640px
-                                    1040: {
-                                        slidesPerView: 4,
-                                        spaceBetween:15
-                                    }
-                                }}>
-                                    {
-                                        
-                                        smallSlide(10)
-                                    }
-                               </Swiper>
+    <div className=' mt-8  h-[380px] w-full'>                                   
+        <Swiper className='w-full py-6 px-2 relative h-full flex items-center' modules={[Autoplay]} autoplay={{ delay: 500, disableOnInteraction: false, }} speed={5000} loop={true} slidesPerView={4} breakpoints={{
+            
+            // when window width is >= 480px
+            180: {
+                slidesPerView: 1,
+                spaceBetween:15
+            },
+            730: {
+                slidesPerView: 2,
+                spaceBetween:15
+            },
+            800: {
+                slidesPerView: 3,
+                spaceBetween:15
+            },
+            // when window width is >= 640px
+            1040: {
+                slidesPerView: 4,
+                spaceBetween:15
+            }
+        }}>
+            {
+                
+                smallSlide(10)
+            }
+        </Swiper>
     </div>
   )
 }
