@@ -65,7 +65,7 @@ export const Table = () => {
                        <AiFillGold  size={25} color='orange' className='mr-2'/> Altın
                     </Tab>
                   </Tab.List>
-                  <Tab.Panels className="mt-2" ref={parent}>
+                  <Tab.Panels className="mt-8 border rounded-md" ref={parent}>
                       <Tab.Panel className={classNames('rounded-xl bg-white p-3','ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
                         )}>
                           <div className=' flex flex-col items-center overflow-hidden  justify-center px-4 md:px-10  pt-2'>
@@ -73,11 +73,11 @@ export const Table = () => {
                               <thead className='bg-slate-100   text-dark-gray '>
                                 <tr className=' rounded-t overflow-hidden'>
                                   <td className='rounded-tl py-7 font-semibold text-center'>Sembol</td>
-                                  <td className='font-semibold text-center'>İsim</td>
+                                  <td className='font-semibold hidden sm:table-cell text-center'>İsim</td>
                                   <td className='text-center font-semibold'>Yön</td>
                                   <td className='text-center font-semibold'>Alış</td>
                                   <td className='text-center font-semibold'>Satış</td>
-                                  <td className='text-center rounded-tr font-semibold'>Değişim</td>
+                                  <td className='text-center hidden lg:table-cell rounded-tr font-semibold'>Değişim</td>
                                 </tr>
                               </thead>
                               <tbody className='bg-white'>
@@ -86,10 +86,10 @@ export const Table = () => {
                                   forexs.map((forex,index) => {
                                     return (
                                       <tr key={forex.title} className="hover:bg-slate-100 cursor-pointer">
-                                        <td className='border-t  px-1  py-8 text-center flex items-center justify-center '>
+                                        <td className='border-t  px-1  py-8 text-center gap-x-1 sm:gap-x-4 flex items-center justify-center '>
                                           <CurrencyFlag currency={forex.sembol} size="xl" className="mr-3" />{forex.sembol}
                                         </td>
-                                        <td className=' border-t  px-1 text-center'>{forex.title}</td>
+                                        <td className=' border-t hidden sm:table-cell  px-1 text-center'>{forex.title}</td>
                                         <td className=' text-center border-t '>
                                           <div className='w-full h-full flex items-center justify-center'>
                                             {
@@ -104,7 +104,7 @@ export const Table = () => {
                                         </td>
                                         <td className='text-center border-t  px-1'>{forex.Alış}</td>
                                         <td className='text-center border-t  px-1'>{forex.Satış}</td>
-                                        <td className='text-center border-t  px-1'>{forex.Değişim}</td>
+                                        <td className='text-center border-t hidden lg:table-cell  px-1'>{forex.Değişim}</td>
                                       </tr>
                                     )
                                   })
@@ -128,11 +128,11 @@ export const Table = () => {
                               <thead className='bg-slate-100   text-dark-gray '>
                                 <tr className=' rounded-t overflow-hidden'>
                                   <td className='rounded-tl py-8 font-semibold text-center'>Sembol</td>
-                                  <td className='font-semibold text-center'>İsim</td>
+                                  <td className='font-semibold hidden sm:table-cell text-center'>İsim</td>
                                   <td className='text-center font-semibold'>Yön</td>
                                   <td className='text-center font-semibold'>Alış</td>
                                   <td className='text-center font-semibold'>Satış</td>
-                                  <td className='text-center rounded-tr font-semibold'>Değişim</td>
+                                  <td className='text-center hidden lg:table-cell rounded-tr font-semibold'>Değişim</td>
                                 </tr>
                               </thead>
                               <tbody className='bg-white'>
@@ -142,9 +142,9 @@ export const Table = () => {
                                     return (
                                       <tr key={forex.title} className="hover:bg-slate-100 cursor-pointer">
                                         <td className='border-t border-b-slate-300 px-1 gap-x-4 py-8 text-center flex items-center justify-center '>
-                                          <img  src={forex.sembol == "gumus" ? silver : gold} className=" mr-3 w-[50px]" />{forex.sembol}
+                                          <img  src={forex.sembol == "gumus" ? silver : gold} className=" w-[50px]" />{forex.sembol}
                                         </td>
-                                        <td className=' border-t  px-1 text-center'>{forex.title}</td>
+                                        <td className=' border-t hidden sm:table-cell  px-1 text-center'>{forex.title}</td>
                                         <td className=' text-center border-t px-1'>
                                           <div className='w-full h-full flex items-center justify-center'>
                                             {
@@ -159,7 +159,7 @@ export const Table = () => {
                                         </td>
                                         <td className='text-center border-t  px-1'>{forex.Alış}</td>
                                         <td className='text-center border-t  px-1'>{forex.Satış}</td>
-                                        <td className='text-center border-t  px-1'>{forex.Değişim}</td>
+                                        <td className='text-center border-t hidden lg:table-cell  px-1'>{forex.Değişim}</td>
                                       </tr>
                                     )
                                   })
@@ -177,10 +177,6 @@ export const Table = () => {
 
                   </Tab.Panels>
                 </Tab.Group>
-
-                  {/* bg-slate-100 */}
-              
-                  
 
               </>
 
