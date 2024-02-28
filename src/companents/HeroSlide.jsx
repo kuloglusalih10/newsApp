@@ -61,7 +61,7 @@ import { motion } from "framer-motion"
                         news.slice(1,4).map((news, index)=>{
                             
                             return (
-                                <motion.div className='col-span-1 rounded-md  row-span-1 flex items-center border bg-white'
+                                <motion.div onClick={() => {setModal(news.image,news.title,news.description,news.link); setOpenModal(true)}} className='col-span-1 cursor-pointer rounded-md  row-span-1 flex items-center border bg-white'
                                     initial={{ opacity: 0, x:  "100px" }}
                                     whileInView={{ opacity: 1, x:0 }}
                                     transition={{ duration: 0.5, delay: index / 3 }} 
