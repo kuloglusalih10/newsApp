@@ -6,7 +6,7 @@ Bu proje, haberleri takip etmek ve göz atmak için kullanıcı dostu bir web uy
 
 ## Demo
 
-[https://news.kuloglusalih10.com.tr/ekonomi](https://news-app-sepia-omega.vercel.app/ekonomi)
+https://news-kuloglusalih10.netlify.app/
 
   
 ## Install 
