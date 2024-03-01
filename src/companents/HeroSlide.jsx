@@ -71,7 +71,7 @@ import { motion } from "framer-motion"
                                         <h2 className='text-dark-gray w-full line-clamp-2 text-wrap truncate text-ellipsis font-semibold lg:text-2xl md:text-xl text-base font-sans'>
                                             {news.title}
                                         </h2>
-                                        <p className='text-[#818389] text-wrap truncate text-ellipsis line-clamp-2 lg:line-clamp-3'>
+                                        <p className='text-[#818389] text-wrap truncate whitespace-normal text-ellipsis line-clamp-2 lg:line-clamp-3'>
                                             {news.description}
                                         </p>
                                         <div className='flex items-center gap-x-2 '>
